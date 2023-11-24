@@ -31,6 +31,10 @@ while True:
             if event.key == pg.K_s:
                 if maze.testCollision(ai.pos, 'down'):
                     ai.pos[1] += maze.tileSize
+            ai.trail.append(pg.rect.Rect(ai.pos, (maze.tileSize, maze.tileSize)))
+
+    for i in range(len(ai.trail)):
+        pg.draw.rect(screen, (96,96,96), ai.trail[i])
 
     if ai.pos == [608, 640]:
         pg.quit()
