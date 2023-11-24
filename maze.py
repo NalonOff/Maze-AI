@@ -35,6 +35,11 @@ class Maze:
         maze[height - 1][width - 2] = ' '
 
         return maze
+    
+    def is_finished(self, pos):
+        if pos == [608, 640]:
+            return True
+        return False
 
     def draw(self, screen, maze):
         y = 0
