@@ -2,7 +2,7 @@ import pygame as pg
 import random
 
 class Maze:
-    def __init__(self) -> None:
+    def __init__(self, width, height) -> None:
         self.textures = {
             'wall': pg.transform.scale2x(pg.image.load('assets\\textures\\wall.png')),
             'floor': pg.transform.scale2x(pg.image.load('assets\\textures\\floor.png'))
@@ -10,6 +10,7 @@ class Maze:
 
         self.tileSize = 32
         self.collisions = []
+        self.created = self.create(width, height)
 
     def create(self, width, height):
         maze = [['#' for _ in range(width)] for _ in range(height)]
@@ -49,24 +50,24 @@ class Maze:
             y += 1
 
     def testCollision(self, pos, direction):
-        if direction == 'right':
-            if (pos[0] + self.tileSize, pos[1]) in self.collisions:
-                return False   
-            else:
-                return True
-        if direction == 'left':
-            if (pos[0] - self.tileSize, pos[1]) in self.collisions:
-                return False   
-            else:
-                return True
-        if direction == 'up':
+        # 0: haut, 1: bas, 2: gauche, 3: droite
+        if direction == 0:
             if (pos[0], pos[1] - self.tileSize) in self.collisions:
                 return False   
             else:
                 return True
-        if direction == 'down':
+        if direction == 1:
             if (pos[0], pos[1] + self.tileSize) in self.collisions:
                 return False   
             else:
                 return True
-                
+        if direction == 2:
+            if (pos[0] - self.tileSize, pos[1]) in self.collisions:
+                return False   
+            else:
+                return True
+        if direction == 3:
+            if (pos[0] + self.tileSize, pos[1]) in self.collisions:
+                return False   
+            else:
+                return True

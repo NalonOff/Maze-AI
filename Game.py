@@ -3,10 +3,9 @@ import sys
 from maze import Maze
 
 class Game:
-    def __init__(self) -> None:
-        self.maze = Maze()
+    def __init__(self, maze) -> None:
+        self.maze = maze
         self.initialPos = [16, 0]
-        self.mazeCreated = self.maze.create(13, 13)
 
     def play(self, screen, ai):
         while not self.is_finished(ai.pos):
@@ -18,16 +17,16 @@ class Game:
                 # Movement
                 if event.type == pg.KEYDOWN:
                     if event.key == pg.K_d:
-                        if self.maze.testCollision(ai.pos, 'right'):
+                        if self.maze.testCollision(ai.pos, 3):
                             ai.pos[0] += self.maze.tileSize
                     if event.key == pg.K_a:
-                        if self.maze.testCollision(ai.pos, 'left'):
+                        if self.maze.testCollision(ai.pos, 2):
                             ai.pos[0] -= self.maze.tileSize
                     if event.key == pg.K_w:
-                        if self.maze.testCollision(ai.pos, 'up'):
+                        if self.maze.testCollision(ai.pos, 0):
                             ai.pos[1] -= self.maze.tileSize
                     if event.key == pg.K_s:
-                        if self.maze.testCollision(ai.pos, 'down'):
+                        if self.maze.testCollision(ai.pos, 1):
                             ai.pos[1] += self.maze.tileSize
                     ai.trail.append(pg.rect.Rect(ai.pos, (self.maze.tileSize, self.maze.tileSize)))
 
@@ -35,6 +34,8 @@ class Game:
 
             pg.display.flip()
             screen.fill((0,0,0))
+
+            #print(ai.valueFunction)
 
             #clock.tick(60)
 
@@ -50,6 +51,6 @@ class Game:
         for i in range(len(ai.trail)):
             pg.draw.rect(screen, (96,96,96), ai.trail[i])
 
-        self.maze.draw(screen, self.mazeCreated)
+        self.maze.draw(screen, self.maze.created)
         screen.blit(ai.image, ai.pos)
         
