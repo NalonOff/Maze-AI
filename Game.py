@@ -1,6 +1,5 @@
 import pygame as pg
 import sys
-from maze import Maze
 
 class Game:
     def __init__(self, maze) -> None:

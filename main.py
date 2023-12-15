@@ -1,5 +1,4 @@
 import pygame as pg
-import sys
 
 from maze import Maze
 from ai import AI
