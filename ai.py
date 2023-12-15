@@ -90,3 +90,4 @@ class AI:
                 self.V[s] = self.V[s] + 0.001*(r - self.V[s])
 
         self.history = []
+        

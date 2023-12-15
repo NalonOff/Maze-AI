@@ -20,5 +20,3 @@ if __name__ == '__main__':
         if i % 10 == 0:
             ai.eps = max(ai.eps*0.996, 0.05)
         game.play(screen, ai)
-
-    
